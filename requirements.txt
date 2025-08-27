@@ -40,4 +40,6 @@ urllib3==2.4.0
 zope.interface==7.2
 gunicorn
 whitenoise
+xhtml2pdf
+
 
