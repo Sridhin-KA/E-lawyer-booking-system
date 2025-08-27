@@ -39,10 +39,10 @@ urlpatterns = [
 
 
 
-]
 
 
-    path('vault/',vaultopen, name='vaultopen')
+
+
 
 
     
