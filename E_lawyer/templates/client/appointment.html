@@ -8,16 +8,6 @@
 
   <!-- Category Search -->
   <form method="get" class="mb-4">
-<<<<<<< HEAD
-    <select name="category" class="form-control w-50 mb-3" onchange="this.form.submit(); toggleOtherCategory()">
-      <option value="">-- All Categories --</option>
-      <option value="Criminal" {% if selected_category == "Criminal" %}selected{% endif %}>Criminal Lawyer</option>
-      <option value="Civil" {% if selected_category == "Civil" %}selected{% endif %}>Civil Lawyer</option>
-      <option value="Corporate" {% if selected_category == "Corporate" %}selected{% endif %}>Corporate Lawyer</option>
-      <option value="Other" {% if selected_category == "Other" %}selected{% endif %}>Other</option>
-    </select>
-
-=======
     <select name="category" class="form-control w-50 mb-3" onchange="this.form.submit()">
       <option value="">-- All Categories --</option>
       <option value="criminal" {% if selected_category == "criminal" %}selected{% endif %}>Criminal Lawyer</option>
@@ -25,7 +15,6 @@
       <option value="corporate" {% if selected_category == "corporate" %}selected{% endif %}>Corporate Lawyer</option>
       <option value="other" {% if selected_category == "other" %}selected{% endif %}>Other</option>
     </select>
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
   </form>
 
   <!-- Lawyer Cards -->
@@ -118,7 +107,6 @@
     {% endfor %}
   {% endif %}
 </div>
-<<<<<<< HEAD
 
 <script>
   // Function to show or hide the input box when "Other" is selected
@@ -140,6 +128,4 @@
   };
 </script>
 
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
 {% endblock %}

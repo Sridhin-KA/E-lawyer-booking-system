@@ -4,7 +4,6 @@
 
 {% block content %}
 
-<<<<<<< HEAD
 <style>
     body {
         background: #f0f2f5;
@@ -172,94 +171,3 @@
 </script>
 
 {% endblock %}
-=======
-<div class="bg-light py-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mb-0">
-            <a href="{% url 'Law:chome' %}">Home</a> <span class="mx-2 mb-0">/</span>
-            <strong class="text-black">Register</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="site-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h2 class="h3 mb-5 text-black text-center">Client Account Register</h2>
-          </div>
-          <div class="col-md-12">
-
-            {% for i in messages %}
-              <span style="color:red;">{{i}}</span>
-            {% endfor %}
-
-            <form action="#" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-              <div class="p-3 p-lg-5 border">
-                <div class="form-group row">
-                  <div class="col-md-6">
-                    <label for="c_fname" class="text-black">First Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="c_fname" name="c_fname">
-                  </div>
-                  <div class="col-md-6">
-                    <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="c_lname" name="c_lname">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-md-6">
-                    <label for="c_email" class="text-black">Email <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control" id="c_email" name="c_email" placeholder="">
-                  </div>
-                  <div class="col-md-6">
-                    <label for="c_phone" class="text-black">Phone <span class="text-danger">*</span></label>
-                    <input type="number" class="form-control" id="c_phone" name="c_phone" placeholder="">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-md-6">
-                    <label for="c_password" class="text-black">Password </label>
-                    <input type="password" class="form-control" id="c_password" name="c_password">
-                  </div>
-                  <div class="col-md-6">
-                    <label for="c_repassword" class="text-black">Retype-Password </label>
-                    <input type="password" class="form-control" id="c_repassword" name="c_repassword">
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <div class="col-md-6">
-                    <label for="c_address" class="text-black">Address </label>
-                    <textarea name="c_address" id="c_address" cols="30" rows="2" class="form-control"></textarea>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="c_image" class="text-black">Profile Image </label>
-                    <input type="file" class="form-control" id="c_image" name="c_image">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-lg-3">
-                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Register">
-                  </div>
-                </div>
-
-                <a href="">
-                  <p style="color:green;">Already have an account ?</p>
-                </a>
-
-              </div>
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-
-
-
-{% endblock %}
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024

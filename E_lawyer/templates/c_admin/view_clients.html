@@ -90,28 +90,28 @@
 
   <!-- Sidebar -->
   <nav class="sidebar">
-<<<<<<< HEAD
+
     <a href="{% url 'Law:dashboard' %}" class="nav-link ">
       <i class="fas fa-tachometer-alt"></i>Dashboard
     </a>
     <a href="{% url 'Law:clientview' %}" class="nav-link active">
-=======
+
     <a href="#" class="nav-link active">
       <i class="fas fa-tachometer-alt"></i>Dashboard
     </a>
     <a href="{% url 'Law:clientview' %}" class="nav-link">
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
       <i class="fas fa-users"></i>View Clients
     </a>
     <a href="{% url 'Law:lawyerview' %}" class="nav-link">
       <i class="fas fa-user-tie"></i>View Lawyer
     </a>
-<<<<<<< HEAD
+
     <a href="{% url 'Law:billview' %}" class="nav-link">
       <i class="fas fa-file-invoice"></i> Total Bills
     </a>
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
+
     <a href="{% url 'Law:appointmentview' %}" class="nav-link">
       <i class="fas fa-list"></i>Booking List
     </a>
@@ -138,11 +138,11 @@
           {% for client in clients %}
           <tr>
             <td>{{ forloop.counter }}</td>
-<<<<<<< HEAD
+
             <td>{{ client.first_name }}</td>
-=======
+
             <td>{{ client.name }}</td>
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
             <td>{{ client.email }}</td>
             <td>{{ client.phone }}</td>
             <td>

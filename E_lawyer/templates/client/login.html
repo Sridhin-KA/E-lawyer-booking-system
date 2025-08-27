@@ -1,6 +1,5 @@
 {% extends 'home/base.html' %}
 {% load static %}
-<<<<<<< HEAD
 {% block title %}Login{% endblock %}
 
 {% block content %}
@@ -112,66 +111,3 @@
 </div>
 
 {% endblock %}
-=======
-{% block title %} Login {% endblock %}
-
-{% block content %}
-
-
-<div class="bg-light py-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mb-0">
-            <a href="{% url 'Law:chome' %}">Home</a> <span class="mx-2 mb-0">/</span>
-            <strong class="text-black">Login</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container-xxl py-5 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="container">
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-4">
-                    <div class="bg-light p-5 h-100 d-flex align-items-center">
-                      <form method="post">
-                            {% csrf_token %}
-                            {% if messages %}
-                            <ul type="none">
-                                {% for message in messages %}
-                                <li style="color:red;">{{ message }}</li>
-                                {% endfor %}
-                            </ul>
-                            {% endif %}
-                          <h2 class="h3 mb-5 text-black text-center">User Login</h2>
-                          {{ form.as_p }}
-
-                            <div class="form-group row">
-                                 <label for="c_fname" class="text-black">UserName<span class="text-danger">*</span></label>
-                                 <input type="text" class="form-control" id="c_fname" name="c_fname">
-
-                            </div>
-                            <div class="form-group row">
-                                <label for="c_password" class="text-black">Password </label>
-                                <input type="password" class="form-control" id="c_password" name="c_password">
-
-                            </div>
-                            <div class="form-group row">
-                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Login">
-
-                            </div>
-                            <div class="form-group row">
-                                <a href="{% url 'client:register' %}" style="color:green;">Create New Account?</a>
-                                
-                            </div>
-                      </form>
-                    </div>
-
-                 </div>
-            </div>
-      </div>
-    </div>
-
-
-{% endblock %}
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024

@@ -76,29 +76,29 @@
     <div class="row">
       <!-- Sidebar -->
       <nav class="col-md-2 sidebar d-flex flex-column">
-<<<<<<< HEAD
+
         <a href="{% url 'Law:dashboard' %}" class="nav-link ">
           <i class="fas fa-tachometer-alt"></i>Dashboard
-=======
+
         <a href="#" class="nav-link active">
           <i class="fas fa-tachometer-alt"></i> Dashboard
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
         </a>
         <a href="{% url 'Law:clientview' %}" class="nav-link">
           <i class="fas fa-users"></i> View Clients
         </a>
-<<<<<<< HEAD
+
         <a href="{% url 'Law:lawyerview' %}" class="nav-link active">
           <i class="fas fa-user-tie"></i> View Lawyer
         </a>
         <a href="{% url 'Law:billview' %}" class="nav-link">
           <i class="fas fa-file-invoice"></i> Total Bills
         </a>
-=======
+
         <a href="{% url 'Law:lawyerview' %}" class="nav-link">
           <i class="fas fa-user-tie"></i> View Lawyer
         </a>
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
         <a href="{% url 'Law:appointmentview' %}" class="nav-link">
           <i class="fas fa-list"></i> Booking List
         </a>
@@ -119,10 +119,9 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Specialization</th>
-<<<<<<< HEAD
+
                 <th>License Number</th>
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
                 <th>Verified</th>
                 <th>Action</th>
               </tr>
@@ -135,10 +134,9 @@
                 <td>{{ lawyer.email }}</td>
                 <td>{{ lawyer.phone }}</td>
                 <td>{{ lawyer.category }}</td>
-<<<<<<< HEAD
+
                 <td>{{ lawyer.license_number }}</td>
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
                 <td>
                   {% if not lawyer.is_verified %}
                     <form action="{% url 'Law:verify_lawyer' lawyer.id.pk %}" method="post">
