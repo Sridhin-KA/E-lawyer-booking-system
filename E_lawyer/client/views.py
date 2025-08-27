@@ -203,22 +203,14 @@ def appointment(request):
     category = request.GET.get('category', '')
 
     if category:
-
         if category.lower() == 'other':
             # Fetch lawyers whose category is neither 'criminal', 'civil', nor 'corporate'
             lawyers = LawyerDetails.objects.exclude(category__in=['Criminal', 'Civil', 'Corporate'])
         else:
             # Fetch lawyers with the selected category
-            lawyers = LawyerDetails.objects.filter(category__iexact=category)  # Using 'iexact' for case-insensitive comparison
+            lawyers = LawyerDetails.objects.filter(category__iexact=category)  # Case-insensitive
     else:
         # Fetch all lawyers if no category is selected
-
-        if category == 'other':
-            lawyers = LawyerDetails.objects.exclude(category__in=['criminal', 'civil', 'corporate'])
-        else:
-            lawyers = LawyerDetails.objects.filter(category=category)
-    else:
-
         lawyers = LawyerDetails.objects.all()
 
     today = date.today().isoformat()
