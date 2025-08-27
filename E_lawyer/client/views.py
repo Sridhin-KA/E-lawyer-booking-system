@@ -369,16 +369,16 @@ def chat_view(request, lawyer_id):
 def chat_page(request, username):
 
     user = get_object_or_404(User, username=username)
-    print(user, 'user')
+    # print(user, 'user')
 
     lawyer = get_object_or_404(LawyerDetails, id=user.id)
-    print(lawyer, 'lawyer')
+    # print(lawyer, 'lawyer')
 
     client = get_object_or_404(ClientDetails, id=request.user.id)
-    print(client, 'client')
+    # print(client, 'client')
 
     appointment = Appointment.objects.filter(user=request.user, lawyer=lawyer, status='Paid').first()
-    print(appointment, 'appointment')
+    # print(appointment, 'appointment')
 
     if appointment:
         # Check if the client has made the payment for this appointment
