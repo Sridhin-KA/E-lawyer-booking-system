@@ -22,7 +22,6 @@ urlpatterns = [
     path('start-video-call/<int:lawyer_id>/',start_video_call, name='start_video_call'),
     path('join-video-call/<str:room_code>/',join_video_call, name='join_video_call'),
     path('send-room-code-email/<str:room_id>/',send_room_code_email, name='send_room_code_email'),
-<<<<<<< HEAD
     path('vault/',vaultopen, name='vaultopen'),
     path('profile/',client_profile, name='profile'),
     path('payments/',payments_view, name='payments'),
@@ -42,9 +41,9 @@ urlpatterns = [
 
 ]
 
-=======
+
     path('vault/',vaultopen, name='vaultopen')
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
 
     
 
@@ -52,7 +51,6 @@ urlpatterns = [
 
 
 
-<<<<<<< HEAD
-=======
+
 ]
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+

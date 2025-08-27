@@ -18,13 +18,11 @@ urlpatterns = [
     path('join_room/', views.join_room, name='join_room'),
     path('room/<str:room_number>/', views.video_call_room, name='video_call_room'),
     path('vault',views.lawyer_vault,name='vault'),
-<<<<<<< HEAD
+
     path('lawyer_profile',views.lawyer_profile,name='lawyer_profile'),
     path('status/', views.case_status_view, name='status'), 
     path('update_case_status/<int:appointment_id>/', views.update_case_status, name='update_case_status'),   
-=======
-    
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
 
 
 

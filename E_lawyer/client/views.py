@@ -17,7 +17,7 @@ import string
 from django.conf import settings
 from django.http import HttpResponseServerError
 from django.contrib.auth import authenticate, login
-<<<<<<< HEAD
+
 from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.http import JsonResponse
@@ -25,8 +25,7 @@ from django.utils.crypto import get_random_string
 from django.contrib.auth import update_session_auth_hash
 import json
 
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
 
 
 # Create your views here.
@@ -199,15 +198,12 @@ def Logout(request):
     messages.error(request,'Logout Successful')
     return redirect('/client/login')
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
 def appointment(request):
     category = request.GET.get('category', '')
 
     if category:
-<<<<<<< HEAD
+
         if category.lower() == 'other':
             # Fetch lawyers whose category is neither 'criminal', 'civil', nor 'corporate'
             lawyers = LawyerDetails.objects.exclude(category__in=['Criminal', 'Civil', 'Corporate'])
@@ -216,13 +212,13 @@ def appointment(request):
             lawyers = LawyerDetails.objects.filter(category__iexact=category)  # Using 'iexact' for case-insensitive comparison
     else:
         # Fetch all lawyers if no category is selected
-=======
+
         if category == 'other':
             lawyers = LawyerDetails.objects.exclude(category__in=['criminal', 'civil', 'corporate'])
         else:
             lawyers = LawyerDetails.objects.filter(category=category)
     else:
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
         lawyers = LawyerDetails.objects.all()
 
     today = date.today().isoformat()
@@ -546,7 +542,7 @@ def vaultopen(request):
         'files': user_files,
         'lawyers': paid_lawyers
     })
-<<<<<<< HEAD
+
 
 @login_required
 def client_profile(request):
@@ -600,5 +596,4 @@ def viewstatus(request):
     appointments = Appointment.objects.filter(user=request.user)
     return render(request, 'client/view_status.html', {'appointments': appointments})
 
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+

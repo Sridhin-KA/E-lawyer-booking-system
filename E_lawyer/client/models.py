@@ -30,10 +30,7 @@ class LawyerDetails(models.Model):
         return f'{self.first_name} {self.last_name}'
     
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
 class Appointment(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
@@ -43,7 +40,7 @@ class Appointment(models.Model):
         ('cancelled', 'Cancelled'),
     ]
 
-<<<<<<< HEAD
+
     CASE_STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('won', 'Won'),
@@ -54,8 +51,6 @@ class Appointment(models.Model):
         ('in progress 80%', 'In Progress (80%)'),
     ]
 
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     lawyer = models.ForeignKey('LawyerDetails', on_delete=models.CASCADE)
     issue = models.TextField()
@@ -63,11 +58,10 @@ class Appointment(models.Model):
     appointment_time = models.TimeField()
     appointment_mode = models.CharField(max_length=10, choices=[('online', 'Online'), ('offline', 'Offline')])
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
-<<<<<<< HEAD
-    case_status = models.CharField(max_length=20, choices=CASE_STATUS_CHOICES, default='pending')
-=======
 
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+    case_status = models.CharField(max_length=20, choices=CASE_STATUS_CHOICES, default='pending')
+
+
     class Meta:
         unique_together = ('lawyer', 'appointment_date', 'appointment_time')
 

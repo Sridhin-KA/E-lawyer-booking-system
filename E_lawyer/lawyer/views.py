@@ -13,10 +13,9 @@ import string
 from django.http import Http404
 from django.core.mail import send_mail
 from django.conf import settings
-<<<<<<< HEAD
+
 from django.contrib import messages
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
 
 
 
@@ -285,7 +284,7 @@ def lawyer_vault(request):
         'files': received_files,
         'clients': paid_clients
     })
-<<<<<<< HEAD
+
 
 @login_required
 def lawyer_profile(request):
@@ -326,5 +325,4 @@ def update_case_status(request, appointment_id):
     except Exception as e:
         messages.error(request, f"Error: {str(e)}")
         return redirect('lawyer:status')
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+

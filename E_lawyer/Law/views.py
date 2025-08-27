@@ -7,14 +7,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-<<<<<<< HEAD
+
 from django.shortcuts import get_object_or_404
 from django.template.loader import get_template
 from django.http import HttpResponse
 from xhtml2pdf import pisa
 
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
 
 # Create your views here.
 def  HomeView(request):
@@ -43,11 +41,10 @@ def AdminHome(request):
 def AboutView(request):
     return render(request,'home/about.html')
 
-<<<<<<< HEAD
+
 def dashboard(request):
     return redirect('Law:ahome')
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
 
 def view_clients(request):
     clients = ClientDetails.objects.all()
@@ -89,20 +86,19 @@ def delete_lawyer(request, id):
         lawyer = get_object_or_404(LawyerDetails, id=id)
         lawyer.delete()
         return redirect('Law:lawyerview')
-<<<<<<< HEAD
+
     
 def billview(request):
     payments = Payment.objects.select_related('user', 'lawyer', 'appointment').all()
     return render(request, 'c_admin/billview.html', {'payments': payments})
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+
 
 
 def view_appointments(request):
     appointments = Appointment.objects.all()
     return render(request, 'c_admin/view_appointments.html', {'appointments': appointments})
 
-<<<<<<< HEAD
+
 def download_invoice(request, payment_id):
     payment = get_object_or_404(Payment, id=payment_id, paid=True)
     template_path = 'c_admin/admin_invoice.html'
@@ -118,8 +114,6 @@ def download_invoice(request, payment_id):
         return HttpResponse('Error generating invoice PDF', status=500)
     return response
 
-=======
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
 
 def logout_view(request):
     logout(request)
