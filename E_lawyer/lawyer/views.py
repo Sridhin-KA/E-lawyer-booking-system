@@ -250,7 +250,7 @@ def video_call_room(request, room_number):
         'client': room.client,
     }
 
-    # print(f"Room Details: {room_details}")  # Debugging line
+    
 
     return render(request, 'client/video_call_room.html', room_details)
 

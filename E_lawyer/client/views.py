@@ -369,16 +369,16 @@ def chat_view(request, lawyer_id):
 def chat_page(request, username):
 
     user = get_object_or_404(User, username=username)
-    # print(user, 'user')
+   
 
     lawyer = get_object_or_404(LawyerDetails, id=user.id)
-    # print(lawyer, 'lawyer')
+
 
     client = get_object_or_404(ClientDetails, id=request.user.id)
-    # print(client, 'client')
+
 
     appointment = Appointment.objects.filter(user=request.user, lawyer=lawyer, status='Paid').first()
-    # print(appointment, 'appointment')
+
 
     if appointment:
         # Check if the client has made the payment for this appointment
@@ -489,7 +489,7 @@ def send_room_code_email(request, room_id):
     room = get_object_or_404(VideoCallRoom, room_id=room_id)
 
     if room.lawyer.email:
-        print(room.lawyer.email)
+        
   # Make sure the lawyer has an email
         # Send the room code via email to the lawyer
         send_mail(
