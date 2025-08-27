@@ -26,7 +26,6 @@
                 <li class=""><a href="{% url 'Law:chome' %}">Home</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'Law:about' %}">About</a></li>
-<<<<<<< HEAD
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="appointmentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Appointments
@@ -40,11 +39,6 @@
                 </li>     
                 <li><a href="{% url 'client:payments' %}">View Payments</a></li>           
                 <li><a href="{% url 'client:profile' %}">Profile</a></li>
-=======
-                <li><a href="{% url 'client:appointment' %}">Book Appointment</a></li>
-                <li><a href="{% url 'client:View_appointment' %}">View Appointment</a></li>
-                <li><a href="{% url 'client:vaultopen' %}">Vault</a></li>
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
                 <li><a href="{% url 'client:logout' %}">Logout</a></li>
 
 
