@@ -66,10 +66,7 @@ RAZORPAY_KEY_SECRET = '1kjhnY2TlXO6zzbye9ddibZ7'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-<<<<<<< HEAD
-=======
     'whitenoise.middleware.WhiteNoiseMiddleware', 
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -145,11 +142,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR,]
-<<<<<<< HEAD
-=======
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
->>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
