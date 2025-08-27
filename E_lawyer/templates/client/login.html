@@ -1,0 +1,177 @@
+{% extends 'home/base.html' %}
+{% load static %}
+<<<<<<< HEAD
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<!-- Breadcrumb -->
+<div class="bg-light py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mb-0">
+        <a href="{% url 'Law:chome' %}">Home</a> <span class="mx-2 mb-0">/</span>
+        <strong class="text-black">Login</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Section -->
+<style>
+  .login-section {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1bbacf, #c8e6c9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+  }
+
+  .login-card {
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .login-card:hover {
+    transform: scale(1.02);
+  }
+
+  .login-card h3 {
+    color: #007bff;
+    font-weight: 700;
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: #444;
+  }
+
+  .btn-login {
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 10px 0;
+  }
+
+  .login-link {
+    color: #28a745;
+    font-weight: 500;
+  }
+
+  .login-link:hover {
+    text-decoration: underline;
+  }
+
+  .error-message {
+    font-size: 15px;
+  }
+</style>
+
+<div class="login-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <div class="login-card p-5">
+          <h3 class="text-center mb-4">User Login</h3>
+
+          {% if messages %}
+            <ul class="mb-3" style="list-style-type: none; padding-left: 0;">
+              {% for message in messages %}
+                <li class="text-danger text-center error-message">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+          <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="c_fname" class="form-label">Username <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="c_fname" name="c_fname" placeholder="Enter your username" required>
+            </div>
+
+            <div class="mb-4">
+              <label for="c_password" class="form-label">Password <span class="text-danger">*</span></label>
+              <input type="password" class="form-control" id="c_password" name="c_password" placeholder="Enter your password" required>
+            </div>
+
+            <div class="d-grid">
+              <input type="submit" class="btn btn-primary btn-login" value="Login">
+            </div>
+
+            <div class="text-center mt-4">
+              <a href="{% url 'client:register' %}" class="login-link">Don't have an account? Register here</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+=======
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+
+<div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="{% url 'Law:chome' %}">Home</a> <span class="mx-2 mb-0">/</span>
+            <strong class="text-black">Login</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-xxl py-5 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="bg-light p-5 h-100 d-flex align-items-center">
+                      <form method="post">
+                            {% csrf_token %}
+                            {% if messages %}
+                            <ul type="none">
+                                {% for message in messages %}
+                                <li style="color:red;">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                          <h2 class="h3 mb-5 text-black text-center">User Login</h2>
+                          {{ form.as_p }}
+
+                            <div class="form-group row">
+                                 <label for="c_fname" class="text-black">UserName<span class="text-danger">*</span></label>
+                                 <input type="text" class="form-control" id="c_fname" name="c_fname">
+
+                            </div>
+                            <div class="form-group row">
+                                <label for="c_password" class="text-black">Password </label>
+                                <input type="password" class="form-control" id="c_password" name="c_password">
+
+                            </div>
+                            <div class="form-group row">
+                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Login">
+
+                            </div>
+                            <div class="form-group row">
+                                <a href="{% url 'client:register' %}" style="color:green;">Create New Account?</a>
+                                
+                            </div>
+                      </form>
+                    </div>
+
+                 </div>
+            </div>
+      </div>
+    </div>
+
+
+{% endblock %}
+>>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024

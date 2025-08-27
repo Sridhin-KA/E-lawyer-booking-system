@@ -1,0 +1,51 @@
+{% extends 'home/base.html' %}
+{% block title %} View Appointments {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4">Your Appointments</h2>
+    
+    {% if appointments %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Lawyer</th>
+                        <th>Issue</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Mode</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                        <tr>
+                            <td>{{ appointment.lawyer.first_name }} {{ appointment.lawyer.last_name }}</td>
+                            <td>{{ appointment.issue }}</td>
+                            <td>{{ appointment.appointment_date }}</td>
+                            <td>{{ appointment.appointment_time }}</td>
+                            <td>{{ appointment.appointment_mode|title }}</td>
+                            <td>{{ appointment.status }}</td>
+                            <td>
+                                {% if appointment.status == "confirmed" %}
+                                    <p class="text-danger mb-1">You need to pay the amount to start the consultation.</p>
+                                    <a href="{% url 'client:pay_now' appointment.id %}" class="btn btn-sm btn-success">Pay Now</a>
+                                {% elif appointment.status == "Paid" %}
+                                    <a href="{% url 'client:chat_page' username=appointment.lawyer.id.username %}" class="btn btn-sm btn-primary">Enter Consultation</a>
+                    
+                                {% else %}
+                                    <span class="text-muted">-</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="text-center">You have no appointments yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

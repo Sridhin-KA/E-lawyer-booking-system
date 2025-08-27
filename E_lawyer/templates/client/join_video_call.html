@@ -1,0 +1,139 @@
+{% extends 'home/base.html' %}
+{% block content %}
+
+<div class="container text-center mt-5">
+    <h2>Video Call Room</h2>
+    <h4>Room Code: {{ room.room_id }}</h4>
+    <h5>Talking to Lawyer: {{ room.lawyer.first_name }} {{ room.lawyer.last_name }}</h5>
+
+    <div class="mt-4">
+        <!-- Show the local and remote video containers -->
+        <video id="localVideo" autoplay muted class="border" style="width:45%;"></video>
+        <video id="remoteVideo" autoplay class="border" style="width:45%;"></video>
+        
+        <div class="mt-4">
+            <!-- Display buttons based on the user's role -->
+            {% if user == room.lawyer %}
+                <!-- Lawyer's View: Start Call -->
+                <button id="startButton" class="btn btn-primary">Start Video Call</button>
+            {% else %}
+                <!-- Client's View: Join Call -->
+                <button id="startButton" class="btn btn-success">Join Video Call</button>
+            {% endif %}
+            <button id="endButton" class="btn btn-danger">End Call</button>
+            <!-- Send Room Code via email -->
+            <form method="post" action="{% url 'client:send_room_code_email' room_id=room.room_id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning mt-3">Send Room Code to Lawyer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- PeerJS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.3.1/dist/peerjs.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const roomId = "{{ room.room_id }}";  // Django passes room_id here
+    const localVideo = document.getElementById('localVideo');
+    console.log(localVideo,'localVideo'); 
+    const remoteVideo = document.getElementById('remoteVideo');
+    console.log(remoteVideo,'remoteVideo');
+    const startButton = document.getElementById('startButton');
+    const joinButton = document.getElementById('joinButton');
+    const endButton = document.getElementById('endButton');
+
+    let localStream;
+    let call;
+
+    // Create Peer
+    const peer = new Peer(undefined, {
+        host: '/',   // Assuming you have a PeerJS server (or using PeerServer cloud)
+        port: 9000,  // Replace with your PeerServer port if needed
+        path: '/peerjs'
+    });
+
+    peer.on('open', id => {
+        console.log('Connected to PeerJS server with ID:', id);
+    });
+
+    // Lawyer starts the call
+    startButton.addEventListener('click', async () => {
+        try {
+            // Get access to camera and microphone
+            localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            localVideo.srcObject = localStream;
+
+            // Connect to the client (join the call)
+            call = peer.call(roomId, localStream);
+
+            // When receiving remote stream from the client
+            call.on('stream', remoteStream => {
+                remoteVideo.srcObject = remoteStream;
+            });
+
+            call.on('close', () => {
+                alert('Call Ended');
+                remoteVideo.srcObject = null;
+            });
+
+        } catch (error) {
+            console.error('Error accessing camera/mic', error);
+        }
+    });
+
+    // Client joins the call
+    joinButton.addEventListener('click', async () => {
+        try {
+            // Get access to camera and microphone
+            localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            localVideo.srcObject = localStream;
+
+            // Call the lawyer (join the call)
+            const incomingCall = peer.call(roomId, localStream);
+
+            incomingCall.on('stream', remoteStream => {
+                remoteVideo.srcObject = remoteStream;
+            });
+
+            incomingCall.on('close', () => {
+                alert('Call Ended');
+                remoteVideo.srcObject = null;
+            });
+
+        } catch (error) {
+            console.error('Error accessing camera/mic', error);
+        }
+    });
+
+    // End call
+    endButton.addEventListener('click', () => {
+        if (call) {
+            call.close();
+        }
+        if (localStream) {
+            localStream.getTracks().forEach(track => track.stop());
+            localVideo.srcObject = null;
+        }
+    });
+
+    // Listen if someone calls you (Client receiving call from Lawyer)
+    peer.on('call', incomingCall => {
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then(stream => {
+            localStream = stream;
+            localVideo.srcObject = localStream;
+            incomingCall.answer(localStream);  // Answer the call with local video
+            incomingCall.on('stream', remoteStream => {
+                remoteVideo.srcObject = remoteStream;
+            });
+        })
+        .catch(err => {
+            console.error('Failed to get local stream', err);
+        });
+    });
+});
+</script>
+
+{% endblock %}

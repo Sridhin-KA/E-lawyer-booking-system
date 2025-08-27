@@ -1,0 +1,22 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h3>Incoming Call from Lawyer {{ room.lawyer.username }}</h3>
+    
+    <div class="controls">
+        <button id="acceptCallBtn" class="btn btn-success">Accept Call</button>
+        <button id="rejectCallBtn" class="btn btn-danger">Reject Call</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('acceptCallBtn').addEventListener('click', function() {
+        window.location.href = "{% url 'lawyer:accept_call' room.room_id %}";
+    });
+
+    document.getElementById('rejectCallBtn').addEventListener('click', function() {
+        window.location.href = "{% url 'lawyer:reject_call' room.room_id %}";
+    });
+</script>
+{% endblock %}

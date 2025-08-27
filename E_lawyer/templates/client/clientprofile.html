@@ -1,0 +1,177 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(135deg, #12c2da, #c2c8ce);
+        min-height: 100vh;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow rounded-4 border-0">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h3 class="fw-bold mb-1">Edit Profile</h3>
+                        <p class="text-muted">Keep your information up-to-date</p>
+                        {% if client.photo %}
+                            <img src="{{ client.photo.url }}" alt="Profile Photo" class="rounded-circle mt-3 shadow-sm" width="100" height="100">
+                        {% else %}
+                            <img src="{% static 'images/default-avatar.png' %}" class="rounded-circle mt-3 shadow-sm" width="100" height="100">
+                        {% endif %}
+                    </div>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success text-center">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data" class="row g-3">
+                        {% csrf_token %}
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text" name="first_name" class="form-control form-control-lg rounded-3" value="{{ client.first_name }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" name="last_name" class="form-control form-control-lg rounded-3" value="{{ client.last_name }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Phone</label>
+                            <input type="text" name="phone" class="form-control form-control-lg rounded-3" value="{{ client.phone }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control form-control-lg rounded-3" value="{{ client.email }}" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Address</label>
+                            <textarea name="address" class="form-control form-control-lg rounded-3" rows="2" required>{{ client.address }}</textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Profile Photo</label>
+                            <input type="file" name="photo" class="form-control form-control-lg rounded-3">
+                        </div>
+                        <div class="col-12 text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 rounded-pill shadow-sm">Update Profile</button>
+                        </div>
+                    </form>
+
+                    <!-- Password Reset Button -->
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Entering Email to Request Password Reset -->
+<div class="modal fade" id="passwordResetEmailModal" tabindex="-1" aria-labelledby="passwordResetEmailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="passwordResetEmailModalLabel">Enter Your Email</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="emailForm">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Enter your email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                        <div id="error-message" class="text-danger mt-2" style="display:none;">Email not found! Please check and try again.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Direct Password Reset -->
+<div class="modal fade" id="directPasswordResetModal" tabindex="-1" aria-labelledby="directPasswordResetModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="directPasswordResetModalLabel">Reset Your Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="passwordResetForm" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="new_password" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="new_password" name="new_password" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Reset Password</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<!-- JavaScript to handle password reset -->
+<script>
+    document.getElementById('emailForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var email = document.getElementById('email').value;
+
+        if (!email) {
+            alert('Please enter your email');
+            return;
+        }
+
+        // Check if the entered email matches the registered email
+        fetch('/check-email/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ email: email })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // If email is valid, show the direct password reset modal
+                var resetModal = new bootstrap.Modal(document.getElementById('directPasswordResetModal'));
+                resetModal.show();
+                document.getElementById('passwordResetEmailModal').modal('hide'); // Close the email modal
+            } else {
+                // If email is not valid, show an error message
+                document.getElementById('error-message').style.display = 'block';
+            }
+        });
+    });
+
+    document.getElementById('passwordResetForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var email = document.getElementById('email').value;
+        var newPassword = document.getElementById('new_password').value;
+
+        fetch('/reset-password/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ email: email, new_password: newPassword })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Password successfully reset');
+                window.location.reload();  // Optionally reload the page or close modal
+            } else {
+                alert('Failed to reset password. Please try again.');
+            }
+        });
+    });
+</script>

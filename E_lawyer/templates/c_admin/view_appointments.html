@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Appointments</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+    }
+
+    .sidebar {
+      background-color: #343a40;
+      width: 240px;
+      min-height: 100vh;
+      padding: 30px 15px;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .sidebar .nav-link {
+      display: flex;
+      align-items: center;
+      color: #c2c7d0;
+      text-decoration: none;
+      margin-bottom: 1rem;
+      padding: 10px 15px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar .nav-link i {
+      margin-right: 10px;
+    }
+
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+      background-color: #495057;
+      color: #fff;
+    }
+
+    .main-content {
+      margin-left: 260px;
+      padding: 40px;
+      width: 100%;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #1c1e21;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #1c1e21;
+      color: #ffffff;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        min-height: auto;
+        padding: 10px;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      th {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+
+      td {
+        position: relative;
+        padding-left: 50%;
+        margin-bottom: 10px;
+        border: none;
+        border-bottom: 1px solid #eee;
+      }
+
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        font-weight: bold;
+        color: #333;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar">
+<<<<<<< HEAD
+    <a href="{% url 'Law:dashboard' %}" class="nav-link ">
+      <i class="fas fa-tachometer-alt"></i>Dashboard
+    </a>
+    <a href="{% url 'Law:clientview' %}" class="nav-link ">
+=======
+    <a href="#" class="nav-link active">
+      <i class="fas fa-tachometer-alt"></i>Dashboard
+    </a>
+    <a href="{% url 'Law:clientview' %}" class="nav-link">
+>>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+      <i class="fas fa-users"></i>View Clients
+    </a>
+    <a href="{% url 'Law:lawyerview' %}" class="nav-link">
+      <i class="fas fa-user-tie"></i>View Lawyer
+    </a>
+<<<<<<< HEAD
+    <a href="{% url 'Law:billview' %}" class="nav-link">
+      <i class="fas fa-file-invoice"></i> Total Bills
+    </a>
+    <a href="{% url 'Law:appointmentview' %}" class="nav-link active">
+=======
+    <a href="{% url 'Law:appointmentview' %}" class="nav-link">
+>>>>>>> 8c18ded32e8fc8b4a9705899026da72319422024
+      <i class="fas fa-list"></i>Booking List
+    </a>
+    <a href="{% url 'Law:logoutadmin' %}" class="nav-link">
+      <i class="fas fa-sign-out-alt"></i>Logout
+    </a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <h2>Appointment List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Client</th>
+            <th>Lawyer</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appointment in appointments %}
+          <tr>
+            <td data-label="#">{{ forloop.counter }}</td>
+            <td data-label="Client">{{ appointment.user.username }}</td>
+            <td data-label="Lawyer">{{ appointment.lawyer.first_name }}</td>
+            <td data-label="Date">{{ appointment.appointment_date }}</td>
+            <td data-label="Time">{{ appointment.appointment_time }}</td>
+            <td data-label="Status">{{ appointment.status }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="6" style="text-align: center;">No appointments found.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

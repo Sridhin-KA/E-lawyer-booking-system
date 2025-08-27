@@ -1,0 +1,55 @@
+{% extends 'home/lawyerbase.html' %}
+
+{% block content %}
+<div class="container">
+    <h3>Video Call Room: {{ room.room_id }}</h3>
+    
+    <div class="video-call-container">
+        <div class="video-container">
+            <h5>Lawyer Video</h5>
+            <video id="lawyerVideo" autoplay></video>
+        </div>
+        <div class="video-container">
+            <h5>Client Video</h5>
+            <video id="clientVideo" autoplay></video>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="endCallBtn" class="btn btn-danger">End Call</button>
+    </div>
+</div>
+
+<script>
+    // Get user media and stream video to both participants
+    const roomId = "{{ room.room_id }}";
+    const userId = "{{ request.user.id }}";
+    
+    let localStream;
+    let remoteStream;
+
+    // Set up media devices (camera/microphone)
+    async function getMedia() {
+        try {
+            localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            if (userId === "{{ room.lawyer.id }}") {
+                document.getElementById('lawyerVideo').srcObject = localStream;
+            } else {
+                document.getElementById('clientVideo').srcObject = localStream;
+            }
+        } catch (err) {
+            console.error('Error accessing media devices.', err);
+        }
+    }
+
+    // Initialize media on page load
+    getMedia();
+
+    // Ending the call
+    document.getElementById('endCallBtn').addEventListener('click', function() {
+        localStream.getTracks().forEach(track => track.stop());
+        alert('Call Ended');
+        // Redirect back or close the page
+    });
+</script>
+{% endblock %}

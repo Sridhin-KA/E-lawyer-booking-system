@@ -1,0 +1,65 @@
+{% extends 'home/lawyerbase.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Background -->
+<div class="container py-5" style="background: linear-gradient(135deg, #f3f4f6, #e0f2f1); min-height: 100vh;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Card -->
+            <div class="card shadow-lg rounded-4 border-0">
+                <div class="card-body p-5">
+
+                    <!-- Profile Photo -->
+                    <div class="text-center mb-4">
+                        {% if lawyer.photo %}
+                            <img src="{{ lawyer.photo.url }}" class="rounded-circle shadow" width="140" height="140" alt="Profile Photo">
+                        {% else %}
+                            <img src="{% static 'images/default-lawyer.png' %}" class="rounded-circle shadow" width="140" height="140" alt="Default Profile">
+                        {% endif %}
+                        <h3 class="mt-3 text-primary fw-semibold">{{ lawyer.first_name }} {{ lawyer.last_name }}</h3>
+                        <p class="text-muted">{{ lawyer.category }}</p>
+                    </div>
+
+                    <!-- Form -->
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label">First Name</label>
+                                <input type="text" name="first_name" class="form-control rounded-pill" value="{{ lawyer.first_name }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" name="last_name" class="form-control rounded-pill" value="{{ lawyer.last_name }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Phone</label>
+                                <input type="text" name="phone" class="form-control rounded-pill" value="{{ lawyer.phone }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control rounded-pill" value="{{ lawyer.email }}" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Category</label>
+                                <input type="text" name="category" class="form-control rounded-pill" value="{{ lawyer.category }}" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Profile Photo</label>
+                                <input type="file" name="photo" class="form-control rounded-pill">
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-5">
+                            <button type="submit" class="btn btn-success px-5 py-2 rounded-pill shadow-sm">Update Profile</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

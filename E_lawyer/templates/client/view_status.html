@@ -1,0 +1,91 @@
+{% extends 'home/base.html' %}  <!-- Make sure you extend the correct base template -->
+
+{% block content %}
+<style>
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .status-bar-container {
+        width: 100%;
+        background-color: #e0e0e0;
+        border-radius: 25px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    .status-bar {
+        height: 30px;
+        color: #fff;
+        line-height: 30px;
+        text-align: center;
+        font-weight: 600;
+        transition: width 1s ease-in-out;
+    }
+
+    .status-bar.pending { background-color: #ffc107; }
+    .status-bar.won { background-color: #28a745; }
+    .status-bar.lost { background-color: #dc3545; }
+    .status-bar.in-progress { background-color: #007bff; }
+
+    .appointment-details {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .appointment-details strong {
+        font-weight: 600;
+    }
+</style>
+
+<div class="container">
+    <h2>View Case Status</h2>
+
+    {% if appointments %}
+        <div>
+            {% for appt in appointments %}
+                <div class="status-bar-container">
+                    {% if appt.case_status == 'pending' %}
+                        <div class="status-bar pending" style="width: 100%;">Pending</div>
+                    {% elif appt.case_status == 'won' %}
+                        <div class="status-bar won" style="width: 100%;">Won</div>
+                    {% elif appt.case_status == 'lost' %}
+                        <div class="status-bar lost" style="width: 100%;">Lost</div>
+                    {% elif appt.case_status == 'in_progress' %}
+                        <div class="status-bar in-progress" style="width: 50%;">In Progress</div> 
+                    {% elif appt.case_status == 'in progress 10%' %}
+                        <div class="status-bar in-progress" style="width: 10%;">In Progress (10%)</div>
+                    {% elif appt.case_status == 'in progress 30%' %}
+                        <div class="status-bar in-progress" style="width: 30%;">In Progress (30%)</div>
+                    {% elif appt.case_status == 'in progress 50%' %}
+                        <div class="status-bar in-progress" style="width: 50%;">In Progress (50%)</div>
+                    {% elif appt.case_status == 'in progress 80%' %}
+                        <div class="status-bar in-progress" style="width: 80%;">In Progress (80%)</div>
+                    {% endif %}
+                </div>
+                <div class="appointment-details">
+                    <strong>Client:</strong> {{ appt.user.clientdetails.first_name }} {{ appt.user.clientdetails.last_name }} <br>
+                    <strong>Issue:</strong> {{ appt.issue|truncatewords:10 }} <br>
+                    <strong>Date:</strong> {{ appt.appointment_date }} <br>
+                    <strong>Time:</strong> {{ appt.appointment_time }}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">No appointments found.</div>
+    {% endif %}
+</div>
+
+{% endblock %}

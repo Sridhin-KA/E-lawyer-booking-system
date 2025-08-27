@@ -1,0 +1,58 @@
+{% extends 'home/lawyerbase.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Update Case Status</h2>
+
+  {% if appointments %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-primary">
+          <tr>
+            <th>Client</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Issue</th>
+            <th>Mode</th>
+            <th>Payment Status</th>
+            <th>Case Status</th>
+            <th>Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appt in appointments %}
+          <tr>
+            <td>{{ appt.user.clientdetails.first_name }} {{ appt.user.clientdetails.last_name }}</td>
+            <td>{{ appt.appointment_date }}</td>
+            <td>{{ appt.appointment_time }}</td>
+            <td>{{ appt.issue|truncatewords:10 }}</td>
+            <td>{{ appt.appointment_mode|title }}</td>
+            <td>{{ appt.status|title }}</td>
+            <td>{{ appt.case_status|title }}</td>
+            <td>
+              <form method="POST" action="{% url 'lawyer:update_case_status' appt.id %}">
+                {% csrf_token %}
+                <div class="input-group">
+                  <select name="case_status" class="form-select form-select-sm" required>
+                    <option value="">Select</option>
+                    <option value="pending" {% if appt.case_status == "pending" %}selected{% endif %}>Pending</option>
+                    <option value="won" {% if appt.case_status == "won" %}selected{% endif %}>Won</option>
+                    <option value="lost" {% if appt.case_status == "lost" %}selected{% endif %}>Lost</option>
+                    <option value="in progress 10%" {% if appt.case_status == "in_progress_10" %}selected{% endif %}>In Progress (10%)</option>
+                    <option value="in progress 30%" {% if appt.case_status == "in_progress_30" %}selected{% endif %}>In Progress (30%)</option>
+                    <option value="in progress 50%" {% if appt.case_status == "in_progress_50" %}selected{% endif %}>In Progress (50%)</option>
+                    <option value="in progress 80%" {% if appt.case_status == "in_progress_80" %}selected{% endif %}>In Progress (80%)</option>
+                  </select>
+                  <button class="btn btn-success btn-sm" type="submit">Save</button>
+                </div>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-info text-center">No appointments found.</div>
+  {% endif %}
+</div>
+{% endblock %}

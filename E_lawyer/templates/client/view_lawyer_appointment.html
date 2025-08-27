@@ -1,0 +1,42 @@
+{% extends 'home/lawyerbase.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h3>My Appointments</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Client</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Mode</th>
+                <th>Issue</th>
+                <th>Status</th>
+                <th>Update Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appt in appointments %}
+            <tr>
+                <td>{{ appt.user.clientdetails.first_name }} {{ appt.user.clientdetails.last_name }}</td>
+                <td>{{ appt.appointment_date }}</td>
+                <td>{{ appt.appointment_time }}</td>
+                <td>{{ appt.appointment_mode }}</td>
+                <td>{{ appt.issue }}</td>
+                <td>{{ appt.status }}</td>
+                <td>
+                    <form method="post" action="{% url 'lawyer:update_appointment' appt.id %}">
+                        {% csrf_token %}
+                        <select name="status" class="form-select">
+                            {% for key, value in appt.STATUS_CHOICES %}
+                                <option value="{{ key }}" {% if appt.status == key %}selected{% endif %}>{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary mt-2">Update</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

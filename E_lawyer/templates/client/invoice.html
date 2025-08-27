@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial; font-size: 14px; }
+        .invoice-box { border: 1px solid #eee; padding: 20px; }
+        .title { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+<div class="invoice-box">
+    <div class="title">Invoice</div>
+    <p><strong>Invoice ID:</strong> {{ payment.id }}</p>
+    <p><strong>Name:</strong> {{ payment.user.first_name }} {{ payment.user.last_name }}</p>
+    <p><strong>Lawyer:</strong> {{ payment.lawyer.first_name }} {{ payment.lawyer.last_name }}</p>
+    <p><strong>Date:</strong> {{ payment.appointment.appointment_date }}</p>
+    <p><strong>Time:</strong> {{ payment.appointment.appointment_time }}</p>
+    <p><strong>Mode:</strong> {{ payment.appointment.appointment_mode }}</p>
+    <p><strong>Amount:</strong> ₹{{ payment.amount }}</p>
+    <p><strong>Payment ID:</strong> {{ payment.razorpay_payment_id }}</p>
+    <p><strong>Date Paid:</strong> {{ payment.created_at }}</p>
+</div>
+</body>
+</html>
